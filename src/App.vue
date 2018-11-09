@@ -4,12 +4,12 @@
       <div class="col-md-7">
         <div class="row">
           <div class="col-md-6" v-for="product in products" :key="product.id">
-            <product :product="product" v-on:add-to-cart="addToCart(product)"></product>
+            <product :product="product" v-on:add-to-cart="addToCart(product)" :isInCart="isInCart(product)"></product>
           </div>
         </div>
       </div>
-      <div class="col-md-5">
-
+      <div class="col-md-5 my-5">
+        <cart :items="cart"></cart>
       </div>
     </div>
   </div>
@@ -18,10 +18,12 @@
 <script>
 import products from '@/products.json'
 import Product from '@/components/Product.vue'
+import Cart from '@/components/Cart.vue'
 export default {
   name: 'app',
   components: {
-    Product
+    Product,
+    Cart
   },
   data(){
     return{
@@ -32,6 +34,14 @@ export default {
   methods:{
     addToCart(product){
       this.cart.push(product)
+    },
+    isInCart(product){
+      const item = this.cart.find(item => item.id === product.id)
+      if(item){
+        return true
+      }else{
+        return false
+      }
     }
   }
 }
