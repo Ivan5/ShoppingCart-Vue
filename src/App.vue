@@ -4,7 +4,7 @@
       <div class="col-md-7">
         <div class="row">
           <div class="col-md-6" v-for="product in products" :key="product.id">
-            <product></product>
+            <product :product="product"></product>
           </div>
         </div>
       </div>
